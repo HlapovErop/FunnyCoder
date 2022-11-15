@@ -37,3 +37,21 @@ for i in range(len(train)):
     print(f"Вагон {i + 1}:")
     for passenger in train[i]:
         print(passenger.to_string() if passenger else "Пустое место")
+
+criminal_found = False
+for i in range(len(train)):
+    print(f"Шериф вошел в вагон {i + 1}:")
+    for j in range(len(train[i])):
+        print(f"Шериф смотрит пассажира на месте {j}")
+        passenger = train[i][j]
+        if passenger:
+            if passenger.criminal:
+                print(f"Преступник найден в вагоне {i + 1} на месте {j}")
+                criminal_found = True
+                break
+            else:
+                print("Шериф идет к следующему месту")
+        else:
+            print("Место пустое")
+    if criminal_found:
+        break
