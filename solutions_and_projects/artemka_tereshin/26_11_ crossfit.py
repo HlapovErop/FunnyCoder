@@ -1,4 +1,5 @@
 from statistics import mean
+from random import randint
 
 array_for_test = [1, 10, 40, 43, 23, 22, 72, 12, 74, 3, 6, 23, 732, 101, -3]
 
@@ -110,4 +111,58 @@ def task14(arr):
 
 array14 = [2,4,5,1,2,3,4,5]
 
-print(task14(array14))
+# print(task14(array14))
+
+#Задание про подводников и летчиков
+
+class Soldier:
+    def __init__(self):
+        self.min = 1
+        self.max = 10
+    def to_go(self):
+        way = randint(self.min, self.max)
+        return way
+
+class Flyer(Soldier):
+    def __init__(self):
+        self.min = 20
+        self.max = 50
+
+class Submariner(Soldier):
+    def __init__(self):
+        self.min = 5
+        self.max = 15
+
+def set_army():
+    army = []
+    for i in range(25):
+        # if randint(0, 1):
+        #     army.append(Submariner())
+        # else:
+        #     army.append(Flyer())
+        army.append(Flyer() if randint(0,1) else Submariner())
+    return army
+
+def count_distance(army):
+    total_way = 0
+    for soldier in army:
+        total_way += soldier.to_go()
+    return total_way
+
+def count_av_distance(army):
+    submariners_total, counter = 0, 0
+    for soldier in army:
+        if isinstance(soldier, Submariner):
+            counter += 1
+            submariners_total += soldier.to_go()
+    return submariners_total / counter
+
+# print(count_distance(set_army()), "km")
+# print(count_av_distance(set_army()), "km")
+
+#Задача про кубышку
+class Cup():
+    def __init__(self):
+        self.amount = randint(0, 9999)
+
+bank = [Cup() for i in range(randint(1, 50))]
