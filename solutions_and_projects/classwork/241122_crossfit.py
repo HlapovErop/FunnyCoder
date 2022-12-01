@@ -190,15 +190,55 @@ task20 = lambda: [randint(20, 200) for i in range(0, 10)]
 
 task21 = lambda n: [task20() for i in range(n)]
 
+
 def task22():
     class RandomNumber():
         def __init__(self):
             self.value = randint(0, 200)
+
     array = [RandomNumber() for i in range(10)]
     for el in array:
         if el.value > 100:
             print(f"элемент-{el.value}, ", end="")
     print()
+
+
+class Military():
+    def __init__(self):
+        self.min = 1
+        self.max = 10
+
+    def go(self):
+        return randint(self.min, self.max)
+
+
+class Pilot(Military):
+    def __init__(self):
+        self.min = 20
+        self.max = 50
+
+
+class Submariner(Military):
+    def __init__(self):
+        self.min = 5
+        self.max = 15
+
+
+p1 = Pilot()
+print(p1.go())
+
+
+def task23():
+    array_military = [Pilot() if randint(0, 1) else Submariner() for i in range(25)]
+    total_sum, sum_submariner, count_submariner = 0, 0, 0
+    for el in array_military:
+        step = el.go()
+        if isinstance(el, Submariner):
+            sum_submariner += step
+            count_submariner += 1
+        total_sum += step
+    return {"total_sum": total_sum, "mean_submariner": sum_submariner / count_submariner}
+
 
 print(task1(array_for_test))
 print(task2(array2_for_test))
@@ -221,4 +261,4 @@ print(task19(array19_for_test))
 print(task20())
 print(task21(2))
 task22()
-
+print(task23())
