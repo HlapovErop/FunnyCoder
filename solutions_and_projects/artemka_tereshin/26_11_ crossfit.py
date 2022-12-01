@@ -150,10 +150,19 @@ def count_distance(army):
     return total_way
 
 def count_av_distance(army):
-    total_way = 0
+    submariners_total, counter = 0, 0
     for soldier in army:
-        total_way += soldier.to_go()
-    return total_way / len(army)
+        if isinstance(soldier, Submariner):
+            counter += 1
+            submariners_total += soldier.to_go()
+    return submariners_total / counter
 
-print(count_distance(set_army()), "km")
-print(count_av_distance(set_army()), "km")
+# print(count_distance(set_army()), "km")
+# print(count_av_distance(set_army()), "km")
+
+#Задача про кубышку
+class Cup():
+    def __init__(self):
+        self.amount = randint(0, 9999)
+
+bank = [Cup() for i in range(randint(1, 50))]
